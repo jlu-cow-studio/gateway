@@ -4,9 +4,9 @@ IMAGE_NAME=cowstudio/gateway
 CONTAINER_NAME=gateway
 
 SERVICE_NAME=cowstudio/gateway
-SERVICE_PORT=80
+SERVICE_PORT=3080
 SERVICE_ADDRESS=cowstudio.wayne-lee.cn
-SIDECAR_PORT=4000
+SIDECAR_PORT=4080
 
 # 构建镜像
 docker build -t $IMAGE_NAME .
