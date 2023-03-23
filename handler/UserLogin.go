@@ -34,6 +34,7 @@ func UserLogin(c *gin.Context) {
 		return
 	}
 
+	log.Println("request body: ", buf.String())
 	if err := json.Unmarshal(buf.Bytes(), loginReq); err != nil {
 		loginRes.Base.Message = err.Error()
 		return
