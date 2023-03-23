@@ -39,6 +39,8 @@ func UserLogin(c *gin.Context) {
 		return
 	}
 
+	log.Println("request: ", litter.Sdump(loginReq))
+
 	conn, err := rpc.GetConn(UserCoreServiceName)
 	if err != nil {
 		log.Printf("get rpc conn error: %s\n", err.Error())
