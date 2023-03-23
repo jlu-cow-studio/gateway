@@ -14,7 +14,7 @@ import (
 )
 
 func UserInfo(c *gin.Context) {
-	userInfoReq := new(http_struct.ReqBase)
+	userInfoReq := new(user.UserInfoReq)
 	userInfoRes := &user.UserInfoRes{
 		Base: http_struct.ResBase{
 			Code:    "400",
@@ -49,8 +49,8 @@ func UserInfo(c *gin.Context) {
 
 	rpcUserInfoReq := &user_core.UserInfoReq{
 		Base: &base.BaseReq{
-			Token: userInfoReq.Token,
-			Logid: userInfoReq.LogId,
+			Token: userInfoReq.Base.Token,
+			Logid: userInfoReq.Base.LogId,
 		},
 	}
 
