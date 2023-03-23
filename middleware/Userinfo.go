@@ -27,14 +27,12 @@ func GetUserInfo() gin.HandlerFunc {
 		if cmd := redis.DB.Get(redis.GetUserTokenKey(tokenInfo.Token)); cmd.Err() != nil {
 			tokenInfo.LoginState = http_struct.InvalidToken
 			fmt.Println("invalid token ", cmd.Err())
-			return
 		} else {
 			infoRaw := cmd.String()
 			info := new(model_redis.UserInfo)
 			if err := json.Unmarshal([]byte(infoRaw), info); err != nil {
 				tokenInfo.LoginState = http_struct.NotLogged
 				fmt.Println("user not logged ", err)
-				return
 			}
 
 			tokenInfo.Uid = info.Uid
