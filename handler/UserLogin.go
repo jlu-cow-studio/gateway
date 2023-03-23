@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"bytes"
 	"context"
 	"encoding/json"
 	"log"
@@ -28,14 +27,14 @@ func UserLogin(c *gin.Context) {
 	defer c.JSON(200, loginRes)
 	defer log.Println("response: ", litter.Sdump(loginRes))
 
-	buf := &bytes.Buffer{}
-	if _, err := buf.ReadFrom(c.Request.Body); err != nil {
-		loginRes.Base.Message = err.Error()
+	bodyb, ok := c.Get("body")
+	if !ok {
+		loginRes.Base.Message = "error when get body"
 		return
 	}
 
-	log.Println("request body: ", buf.String())
-	if err := json.Unmarshal(buf.Bytes(), loginReq); err != nil {
+	log.Println("request body: ", string(bodyb.([]byte)))
+	if err := json.Unmarshal(bodyb.([]byte), loginReq); err != nil {
 		loginRes.Base.Message = err.Error()
 		return
 	}

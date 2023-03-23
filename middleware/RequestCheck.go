@@ -17,6 +17,7 @@ func RequestCheck() gin.HandlerFunc {
 		buf.ReadFrom(ctx.Request.Body)
 
 		fmt.Println("checking request: ", buf.String())
+		ctx.Set("body", buf.Bytes())
 
 		if err := json.Unmarshal(buf.Bytes(), baseReq); err != nil {
 			ctx.AbortWithStatusJSON(200, http_struct.InvalidRequest)
