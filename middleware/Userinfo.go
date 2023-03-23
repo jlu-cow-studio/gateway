@@ -15,10 +15,10 @@ func GetUserInfo() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		tmp, _ := ctx.Get("base")
 
-		var base http_struct.OnlyBaseReq = tmp.(http_struct.OnlyBaseReq)
+		var base http_struct.ReqBase = tmp.(http_struct.ReqBase)
 
 		tokenInfo := &http_struct.UserTokenInfo{
-			Token:      base.Base.Token,
+			Token:      base.Token,
 			LoginState: http_struct.NotLogged,
 		}
 
