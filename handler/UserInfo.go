@@ -57,6 +57,8 @@ func UserInfo(c *gin.Context) {
 	log.Printf("rpc request: %+v\n", rpcUserInfoReq)
 
 	rpcUserInfoRes, err := cli.UserInfo(context.Background(), rpcUserInfoReq)
+	log.Printf("rpc response: %+v\n", rpcUserInfoRes)
+
 	if err != nil {
 		log.Printf("rpc call error: %s\n", err.Error())
 		userInfoRes.Base.Message = err.Error()
@@ -70,5 +72,4 @@ func UserInfo(c *gin.Context) {
 	userInfoRes.City = rpcUserInfoRes.UserInfo.City
 	userInfoRes.District = rpcUserInfoRes.UserInfo.District
 	userInfoRes.Role = rpcUserInfoRes.UserInfo.Role
-	log.Printf("rpc response: %+v\n", rpcUserInfoRes)
 }
