@@ -28,7 +28,7 @@ func GetUserInfo() gin.HandlerFunc {
 			tokenInfo.LoginState = http_struct.InvalidToken
 			fmt.Println("invalid token ", cmd.Err())
 		} else {
-			infoRaw := cmd.String()
+			infoRaw := cmd.Val()
 			info := new(model_redis.UserInfo)
 			if err := json.Unmarshal([]byte(infoRaw), info); err != nil {
 				tokenInfo.LoginState = http_struct.NotLogged
