@@ -36,4 +36,5 @@ func RegisterHandlers() {
 
 	server.POST("/item/add", handler.ItemAdd)
 	server.DELETE("/item/delete", handler.ItemDelete)
+	server.POST("/item/update", handler.ItemUpdate)
 }
