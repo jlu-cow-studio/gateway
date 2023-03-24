@@ -33,4 +33,7 @@ func RegisterHandlers() {
 	server.POST("/user/register", handler.UserRegister)
 	server.POST("/user/auth", handler.UserAuth)
 	server.GET("/user/info", handler.UserInfo)
+
+	server.POST("/item/add", handler.ItemAdd)
+	server.DELETE("/item/delete", handler.ItemDelete)
 }
