@@ -69,6 +69,7 @@ func ItemAdd(c *gin.Context) {
 			Category:           addItemReq.Category,
 			Price:              addItemReq.Price,
 			Stock:              addItemReq.Stock,
+			ImageUrl:           addItemReq.ImageUrl,
 			Province:           addItemReq.Province,
 			City:               addItemReq.City,
 			District:           addItemReq.District,
