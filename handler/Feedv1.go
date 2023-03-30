@@ -11,7 +11,6 @@ import (
 	"github.com/jlu-cow-studio/common/dal/rpc/feed_service"
 	"github.com/jlu-cow-studio/common/model/http_struct"
 	"github.com/jlu-cow-studio/common/model/http_struct/feed"
-	"github.com/jlu-cow-studio/common/model/http_struct/item"
 )
 
 const FeedServiceName = "cowstudio/feed"
@@ -74,22 +73,28 @@ func Feedv1(c *gin.Context) {
 
 	getFeedRes.Base.Code = rpcGetFeedRes.Base.Code
 	getFeedRes.Base.Message = rpcGetFeedRes.Base.Message
-	getFeedRes.Items = make([]*item.ItemInfo, len(rpcGetFeedRes.Items))
+	getFeedRes.Items = make([]*feed.ItemForFeed, len(rpcGetFeedRes.Items))
 	for i, info := range rpcGetFeedRes.Items {
-		getFeedRes.Items[i] = &item.ItemInfo{
-			ID:                 info.ItemId,
+		getFeedRes.Items[i] = &feed.ItemForFeed{
+			ID:                 int(info.Id),
 			Name:               info.Name,
 			Description:        info.Description,
 			Category:           info.Category,
 			Price:              info.Price,
-			Stock:              info.Stock,
-			ImageURL:           info.ImageUrl,
+			Stock:              int(info.Stock),
 			Province:           info.Province,
 			City:               info.City,
 			District:           info.District,
-			UserID:             info.UserId,
+			ImageURL:           info.ImageUrl,
+			UserID:             int(info.UserId),
 			UserType:           info.UserType,
 			SpecificAttributes: info.SpecificAttributes,
+			UID:                int(info.Uid),
+			Username:           info.Username,
+			UProvince:          info.Uprovince,
+			UCity:              info.Ucity,
+			UDistrict:          info.Udistrict,
+			URole:              info.Urole,
 		}
 	}
 	getFeedRes.Page = rpcGetFeedRes.Pagination.CurrentPage
