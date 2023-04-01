@@ -34,6 +34,11 @@ func RegisterHandlers() {
 	server.POST("/user/auth", handler.UserAuth)
 	server.GET("/user/info", handler.UserInfo)
 
+	server.POST("/user/follow", handler.UserFollow)
+	server.GET("/user/following", handler.UserFollowing)
+	server.GET("/user/follower", handler.UserFollower)
+	server.GET("/user/follow_count", handler.UserFollowCount)
+
 	server.POST("/item/add", handler.ItemAdd)
 	server.DELETE("/item/delete", handler.ItemDelete)
 	server.POST("/item/update", handler.ItemUpdate)
