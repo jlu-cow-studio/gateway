@@ -5,7 +5,7 @@ CONTAINER_NAME=gateway
 
 SERVICE_NAME=cowstudio/gateway
 SERVICE_PORT=3080
-SERVICE_ADDRESS=cowstudio.wayne-lee.cn
+SERVICE_ADDRESS=$(curl -s http://ipecho.net/plain)
 SIDECAR_PORT=4080
 
 # 构建镜像
