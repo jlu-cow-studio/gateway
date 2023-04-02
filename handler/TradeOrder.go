@@ -13,7 +13,7 @@ import (
 	"github.com/jlu-cow-studio/common/model/http_struct/trade"
 )
 
-func OrderAdd(c *gin.Context) {
+func TradeOrder(c *gin.Context) {
 	orderReq := new(trade.OrderReq)
 	orderRes := &trade.OrderRes{
 		Base: http_struct.ResBase{

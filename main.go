@@ -47,4 +47,6 @@ func RegisterHandlers() {
 	server.PUT("/feed/v1", handler.Feedv1Reset)
 
 	server.POST("/trade/recharge", handler.TradeRecharge)
+	server.GET("/trade/order_list", handler.TradeOrderList)
+	server.POST("/trade/order", handler.TradeOrder)
 }
