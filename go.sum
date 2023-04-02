@@ -611,8 +611,8 @@ github.com/ianlancetaylor/demangle v0.0.0-20200824232613-28f6c0f3b639/go.mod h1:
 github.com/jinzhu/inflection v1.0.0/go.mod h1:h+uFLlag+Qp1Va5pdKtLDYj+kHp5pxUVkryuEj+Srlc=
 github.com/jinzhu/now v1.1.4/go.mod h1:d3SSVoowX0Lcu0IBviAWJpolVfI5UJVZZ7cO71lE/z8=
 github.com/jinzhu/now v1.1.5/go.mod h1:d3SSVoowX0Lcu0IBviAWJpolVfI5UJVZZ7cO71lE/z8=
-github.com/jlu-cow-studio/common v0.2.79 h1:X8ysG2ztJpZ0W6iKSZSTN6y9WdqSDXvTte4jYy5Csh8=
-github.com/jlu-cow-studio/common v0.2.79/go.mod h1:vQfi2FmwlFdjJi6Ks9ZJSB/ZQPf/ySIuY1vOwvo0AnQ=
+github.com/jlu-cow-studio/common v0.2.80 h1:OrugdwD+i2TszHHi/TTLoEMXCDJXd+meeMWVn3c5Q6g=
+github.com/jlu-cow-studio/common v0.2.80/go.mod h1:vQfi2FmwlFdjJi6Ks9ZJSB/ZQPf/ySIuY1vOwvo0AnQ=
 github.com/json-iterator/go v1.1.12 h1:PV8peI4a0ysnczrg+LtxykD8LfKY9ML6u2jnxaEnrnM=
 github.com/json-iterator/go v1.1.12/go.mod h1:e30LSqwooZae/UwlEbR2852Gd8hjQvJoHmT4TnhNGBo=
 github.com/jstemmer/go-junit-report v0.0.0-20190106144839-af01ea7f8024/go.mod h1:6v2b51hI/fHJwM22ozAgKL4VKDeJcHhJFhtBdhmNjmU=

@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"log"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jlu-cow-studio/common/dal/rpc"
@@ -46,14 +47,23 @@ func TradeOrderList(c *gin.Context) {
 		return
 	}
 
+	tokenInfor, _ := c.Get("tokenInfo")
+	tokenInfo := tokenInfor.(*http_struct.UserTokenInfo)
+
 	cli := trade_core.NewTreadeCoreServiceClient(conn)
 
+	uid, err := strconv.Atoi(tokenInfo.Uid)
+	if err != nil {
+		log.Printf("get uid error: %s\n", err.Error())
+		orderListRes.Base.Message = err.Error()
+		return
+	}
 	rpcOrderListReq := &trade_core.OrderListRequest{
 		Base: &base.BaseReq{
 			Token: orderListReq.Base.Token,
 			Logid: orderListReq.Base.LogId,
 		},
-		UserId:   orderListReq.UserID,
+		UserId:   int64(uid),
 		Page:     orderListReq.Page,
 		PageSize: orderListReq.PerPage,
 	}
