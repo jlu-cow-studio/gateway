@@ -4,7 +4,7 @@ go 1.17
 
 require github.com/gin-gonic/gin v1.9.0
 
-require github.com/jlu-cow-studio/common v0.2.80
+require github.com/jlu-cow-studio/common v0.2.81
 
 require github.com/sanity-io/litter v1.5.5
 
