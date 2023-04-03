@@ -8,13 +8,14 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/jlu-cow-studio/common/dal/rpc"
 	"github.com/jlu-cow-studio/common/dal/rpc/base"
-	"github.com/jlu-cow-studio/common/dal/tag_core"
+	"github.com/jlu-cow-studio/common/dal/rpc/tag_core"
 	"github.com/jlu-cow-studio/common/model/http_struct"
+	"github.com/jlu-cow-studio/common/model/http_struct/tag"
 )
 
 func GetTagListByUser(c *gin.Context) {
-	getTagListByUserReq := new(tag.GetTagListByUserRequest)
-	getTagListByUserRes := &tag.GetTagListByUserResponse{
+	getTagListByUserReq := new(tag.GetTagListByUserReq)
+	getTagListByUserRes := &tag.GetTagListByUserRes{
 		Base: http_struct.ResBase{
 			Code:    "400",
 			Message: "failed",
@@ -44,6 +45,9 @@ func GetTagListByUser(c *gin.Context) {
 		return
 	}
 
+	tokenInfor, _ := c.Get("tokenInfo")
+	tokenInfo := tokenInfor.(*http_struct.UserTokenInfo)
+
 	cli := tag_core.NewTagCoreServiceClient(conn)
 
 	rpcGetTagListByUserReq := &tag_core.GetTagListByUserRequest{
@@ -51,7 +55,7 @@ func GetTagListByUser(c *gin.Context) {
 			Token: getTagListByUserReq.Base.Token,
 			Logid: getTagListByUserReq.Base.LogId,
 		},
-		UserId: getTagListByUserReq.UserId,
+		UserId: tokenInfo.Uid,
 	}
 
 	log.Printf("rpc request: %+v\n", rpcGetTagListByUserReq)
@@ -69,21 +73,13 @@ func GetTagListByUser(c *gin.Context) {
 	getTagListByUserRes.Base.Message = rpcGetTagListByUserRes.Base.Message
 
 	// 转换 TagCategoryWithList
-	for _, tcl := range rpcGetTagListByUserRes.List {
-		tcwl := new(tag.TagCategoryWithList)
-		tcwl.TagCategory.ID = int(tcl.Category.Id)
-		tcwl.TagCategory.Name = tcl.Category.Name
-		tcwl.TagCategory.ParentID = int(tcl.Category.ParentId)
-		tcwl.TagCategory.Level = tcl.Category.Level
-		for _, tl := range tcl.TagList {
-			t := new(tag.Tag)
-			t.ID = tl.Id
-			t.Name = tl.Name
-			t.Weight = tl.Weight
-			t.MarkObject = tl.MarkObject
-			t.CategoryID = tl.CategoryId
-			tcwl.TagList = append(tcwl.TagList, t)
-		}
-		getTagListByUserRes.List = append(getTagListByUserRes.List, tcwl)
+	for _, t := range rpcGetTagListByUserRes.TagList {
+		tagItem := new(tag.Tag)
+		tagItem.ID = t.Id
+		tagItem.Name = t.Name
+		tagItem.Weight = t.Weight
+		tagItem.MarkObject = t.MarkObject
+		tagItem.CategoryID = t.CategoryId
+		getTagListByUserRes.TagList = append(getTagListByUserRes.TagList, tagItem)
 	}
 }
