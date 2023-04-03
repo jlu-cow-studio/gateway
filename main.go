@@ -49,4 +49,6 @@ func RegisterHandlers() {
 	server.POST("/trade/recharge", handler.TradeRecharge)
 	server.GET("/trade/order_list", handler.TradeOrderList)
 	server.POST("/trade/order", handler.TradeOrder)
+
+	server.GET("/tag/list_scene", handler.GetTagListByScene)
 }
