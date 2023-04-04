@@ -55,16 +55,17 @@ func ItemUpdate(c *gin.Context) {
 			Logid: updateItemReq.Base.LogId,
 		},
 		Item: &product_core.ItemInfo{
-			ItemId:             updateItemReq.ItemID,
-			Name:               updateItemReq.Name,
-			Description:        updateItemReq.Description,
-			Price:              updateItemReq.Price,
-			Stock:              updateItemReq.Stock,
-			Province:           updateItemReq.Province,
-			City:               updateItemReq.City,
-			District:           updateItemReq.District,
-			SpecificAttributes: updateItemReq.SpecificAttr,
+			ItemId:             updateItemReq.ItemInfo.ID,
+			Name:               updateItemReq.ItemInfo.Name,
+			Description:        updateItemReq.ItemInfo.Description,
+			Price:              updateItemReq.ItemInfo.Price,
+			Stock:              updateItemReq.ItemInfo.Stock,
+			Province:           updateItemReq.ItemInfo.Province,
+			City:               updateItemReq.ItemInfo.City,
+			District:           updateItemReq.ItemInfo.District,
+			SpecificAttributes: updateItemReq.ItemInfo.SpecificAttributes,
 		},
+		TagList: updateItemReq.TagList,
 	}
 
 	log.Printf("rpc request: %+v\n", rpcUpdateItemReq)
