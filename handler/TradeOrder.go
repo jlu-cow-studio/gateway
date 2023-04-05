@@ -45,7 +45,7 @@ func TradeOrder(c *gin.Context) {
 		return
 	}
 
-	cli := trade_core.NewTreadeCoreServiceClient(conn)
+	cli := trade_core.NewTradeCoreServiceClient(conn)
 
 	rpcOrderReq := &trade_core.OrderRequest{
 		Base: &base.BaseReq{

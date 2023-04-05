@@ -48,7 +48,7 @@ func TradeRecharge(c *gin.Context) {
 		return
 	}
 
-	cli := trade_core.NewTreadeCoreServiceClient(conn)
+	cli := trade_core.NewTradeCoreServiceClient(conn)
 
 	rpcRechargeReq := &trade_core.RechargeRequest{
 		Base: &base.BaseReq{

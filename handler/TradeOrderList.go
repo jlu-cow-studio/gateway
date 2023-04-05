@@ -50,7 +50,7 @@ func TradeOrderList(c *gin.Context) {
 	tokenInfor, _ := c.Get("tokenInfo")
 	tokenInfo := tokenInfor.(*http_struct.UserTokenInfo)
 
-	cli := trade_core.NewTreadeCoreServiceClient(conn)
+	cli := trade_core.NewTradeCoreServiceClient(conn)
 
 	uid, err := strconv.Atoi(tokenInfo.Uid)
 	if err != nil {
