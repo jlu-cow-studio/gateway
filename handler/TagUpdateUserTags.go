@@ -38,14 +38,12 @@ func UpdateUserTags(c *gin.Context) {
 
 	log.Println("request: ", updateUserTagsReq)
 
-	conn, err := rpc.GetConn(TagCoreServiceName)
+	cli, err := rpc.GetTagCoreCli()
 	if err != nil {
 		log.Printf("get rpc conn error: %s\n", err.Error())
 		updateUserTagsRes.Base.Message = err.Error()
 		return
 	}
-
-	cli := tag_core.NewTagCoreServiceClient(conn)
 
 	tokenInfor, _ := c.Get("tokenInfo")
 	tokenInfo := tokenInfor.(*http_struct.UserTokenInfo)

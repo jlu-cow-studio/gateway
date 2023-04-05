@@ -38,14 +38,12 @@ func GetTagListByItem(c *gin.Context) {
 
 	log.Println("request: ", getTagListByItemReq)
 
-	conn, err := rpc.GetConn(TagCoreServiceName)
+	cli, err := rpc.GetTagCoreCli()
 	if err != nil {
 		log.Printf("get rpc conn error: %s\n", err.Error())
 		getTagListByItemRes.Base.Message = err.Error()
 		return
 	}
-
-	cli := tag_core.NewTagCoreServiceClient(conn)
 
 	rpcGetTagListByItemReq := &tag_core.GetTagListByItemRequest{
 		Base: &base.BaseReq{

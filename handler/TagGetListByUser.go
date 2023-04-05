@@ -38,7 +38,7 @@ func GetTagListByUser(c *gin.Context) {
 
 	log.Println("request: ", getTagListByUserReq)
 
-	conn, err := rpc.GetConn(TagCoreServiceName)
+	cli, err := rpc.GetTagCoreCli()
 	if err != nil {
 		log.Printf("get rpc conn error: %s\n", err.Error())
 		getTagListByUserRes.Base.Message = err.Error()
@@ -47,8 +47,6 @@ func GetTagListByUser(c *gin.Context) {
 
 	tokenInfor, _ := c.Get("tokenInfo")
 	tokenInfo := tokenInfor.(*http_struct.UserTokenInfo)
-
-	cli := tag_core.NewTagCoreServiceClient(conn)
 
 	rpcGetTagListByUserReq := &tag_core.GetTagListByUserRequest{
 		Base: &base.BaseReq{

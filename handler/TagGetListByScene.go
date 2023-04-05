@@ -40,14 +40,12 @@ func GetTagListByScene(c *gin.Context) {
 
 	log.Println("request: ", getTagListBySceneReq)
 
-	conn, err := rpc.GetConn(TagCoreServiceName)
+	cli, err := rpc.GetTagCoreCli()
 	if err != nil {
 		log.Printf("get rpc conn error: %s\n", err.Error())
 		getTagListBySceneRes.Base.Message = err.Error()
 		return
 	}
-
-	cli := tag_core.NewTagCoreServiceClient(conn)
 
 	rpcGetTagListBySceneReq := &tag_core.GetTagListBySceneRequest{
 		Base: &base.BaseReq{
