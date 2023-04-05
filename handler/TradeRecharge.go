@@ -14,8 +14,6 @@ import (
 	"github.com/jlu-cow-studio/common/model/http_struct/trade"
 )
 
-const TradeCoreServiceName = "cowstudio/trade-core"
-
 func TradeRecharge(c *gin.Context) {
 	rechargeReq := new(trade.RechargeReq)
 	rechargeRes := &trade.RechargeRes{
@@ -41,14 +39,12 @@ func TradeRecharge(c *gin.Context) {
 
 	log.Println("request: ", rechargeReq)
 
-	conn, err := rpc.GetConn(TradeCoreServiceName)
+	cli, err := rpc.GetTradeCoreCli()
 	if err != nil {
 		log.Printf("get rpc conn error: %s\n", err.Error())
 		rechargeRes.Base.Message = err.Error()
 		return
 	}
-
-	cli := trade_core.NewTradeCoreServiceClient(conn)
 
 	rpcRechargeReq := &trade_core.RechargeRequest{
 		Base: &base.BaseReq{

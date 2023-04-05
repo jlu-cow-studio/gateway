@@ -38,14 +38,12 @@ func TradeOrder(c *gin.Context) {
 
 	log.Println("request: ", orderReq)
 
-	conn, err := rpc.GetConn(TradeCoreServiceName)
+	cli, err := rpc.GetTradeCoreCli()
 	if err != nil {
 		log.Printf("get rpc conn error: %s\n", err.Error())
 		orderRes.Base.Message = err.Error()
 		return
 	}
-
-	cli := trade_core.NewTradeCoreServiceClient(conn)
 
 	rpcOrderReq := &trade_core.OrderRequest{
 		Base: &base.BaseReq{

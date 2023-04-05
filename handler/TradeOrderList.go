@@ -40,7 +40,7 @@ func TradeOrderList(c *gin.Context) {
 
 	log.Println("request: ", orderListReq)
 
-	conn, err := rpc.GetConn(TradeCoreServiceName)
+	cli, err := rpc.GetTradeCoreCli()
 	if err != nil {
 		log.Printf("get rpc conn error: %s\n", err.Error())
 		orderListRes.Base.Message = err.Error()
@@ -49,8 +49,6 @@ func TradeOrderList(c *gin.Context) {
 
 	tokenInfor, _ := c.Get("tokenInfo")
 	tokenInfo := tokenInfor.(*http_struct.UserTokenInfo)
-
-	cli := trade_core.NewTradeCoreServiceClient(conn)
 
 	uid, err := strconv.Atoi(tokenInfo.Uid)
 	if err != nil {
