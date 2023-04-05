@@ -47,14 +47,12 @@ func UserFollowCount(c *gin.Context) {
 		return
 	}
 
-	conn, err := rpc.GetConn(UserCoreServiceName)
+	cli, err := rpc.GetUserCoreCli()
 	if err != nil {
 		log.Printf("get rpc conn error: %s\n", err.Error())
 		followCountRes.Base.Message = err.Error()
 		return
 	}
-
-	cli := user_core.NewUserCoreServiceClient(conn)
 
 	rpcFollowCountReq := &user_core.FollowCountReq{
 		Base: &base.BaseReq{

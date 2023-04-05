@@ -48,14 +48,12 @@ func UserFollowing(c *gin.Context) {
 		return
 	}
 
-	conn, err := rpc.GetConn(UserCoreServiceName)
+	cli, err := rpc.GetUserCoreCli()
 	if err != nil {
 		log.Printf("get rpc conn error: %s\n", err.Error())
 		followingRes.Base.Message = err.Error()
 		return
 	}
-
-	cli := user_core.NewUserCoreServiceClient(conn)
 
 	rpcFollowingReq := &user_core.FollowingReq{
 		Base: &base.BaseReq{

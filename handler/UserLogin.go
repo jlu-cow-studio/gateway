@@ -14,8 +14,6 @@ import (
 	"github.com/sanity-io/litter"
 )
 
-const UserCoreServiceName = "cowstudio/user-core"
-
 func UserLogin(c *gin.Context) {
 	loginReq := new(user.UserLoginReq)
 	loginRes := &user.UserLoginRes{
@@ -41,14 +39,12 @@ func UserLogin(c *gin.Context) {
 
 	log.Println("request: ", litter.Sdump(loginReq))
 
-	conn, err := rpc.GetConn(UserCoreServiceName)
+	cli, err := rpc.GetUserCoreCli()
 	if err != nil {
 		log.Printf("get rpc conn error: %s\n", err.Error())
 		loginRes.Base.Message = err.Error()
 		return
 	}
-
-	cli := user_core.NewUserCoreServiceClient(conn)
 
 	rpcUserLoginReq := &user_core.UserLoginReq{
 		Base: &base.BaseReq{
