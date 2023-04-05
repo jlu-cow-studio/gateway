@@ -38,14 +38,12 @@ func ItemDelete(c *gin.Context) {
 
 	log.Println("request: ", deleteItemReq)
 
-	conn, err := rpc.GetConn(ProductCoreServiceName)
+	cli, err := rpc.GetProductCoreCli()
 	if err != nil {
 		log.Printf("get rpc conn error: %s\n", err.Error())
 		deleteItemRes.Base.Message = err.Error()
 		return
 	}
-
-	cli := product_core.NewProductCoreServiceClient(conn)
 
 	rpcDeleteItemReq := &product_core.DeleteItemReq{
 		Base: &base.BaseReq{

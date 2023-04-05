@@ -39,7 +39,7 @@ func ItemAdd(c *gin.Context) {
 
 	log.Println("request: ", addItemReq)
 
-	conn, err := rpc.GetConn(ProductCoreServiceName)
+	cli, err := rpc.GetProductCoreCli()
 	if err != nil {
 		log.Printf("get rpc conn error: %s\n", err.Error())
 		addItemRes.Base.Message = err.Error()
@@ -55,8 +55,6 @@ func ItemAdd(c *gin.Context) {
 		addItemRes.Base.Message = err.Error()
 		return
 	}
-
-	cli := product_core.NewProductCoreServiceClient(conn)
 
 	rpcAddItemReq := &product_core.AddItemReq{
 		Base: &base.BaseReq{

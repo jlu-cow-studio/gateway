@@ -40,14 +40,12 @@ func ItemUpdate(c *gin.Context) {
 
 	log.Println("request: ", updateItemReq)
 
-	conn, err := rpc.GetConn(ProductCoreServiceName)
+	cli, err := rpc.GetProductCoreCli()
 	if err != nil {
 		log.Printf("get rpc conn error: %s\n", err.Error())
 		updateItemRes.Base.Message = err.Error()
 		return
 	}
-
-	cli := product_core.NewProductCoreServiceClient(conn)
 
 	rpcUpdateItemReq := &product_core.UpdateItemReq{
 		Base: &base.BaseReq{
