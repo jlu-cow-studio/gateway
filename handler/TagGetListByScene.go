@@ -13,8 +13,6 @@ import (
 	"github.com/jlu-cow-studio/common/model/http_struct/tag"
 )
 
-const TagCoreServiceName = "cowstudio/tag-core"
-
 func GetTagListByScene(c *gin.Context) {
 	getTagListBySceneReq := new(tag.GetTagListBySceneRequest)
 	getTagListBySceneRes := &tag.GetTagListBySceneResponse{
