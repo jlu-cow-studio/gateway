@@ -38,14 +38,12 @@ func Feedv1Reset(c *gin.Context) {
 
 	log.Println("request: ", resetFeedReq)
 
-	conn, err := rpc.GetConn(FeedServiceName)
+	cli, err := rpc.GetFeedCli()
 	if err != nil {
-		log.Printf("get rpc conn error: %s\n", err.Error())
+		log.Printf("get rpc cli error: %s\n", err.Error())
 		resetFeedRes.Base.Message = err.Error()
 		return
 	}
-
-	cli := feed_service.NewFeedServiceClient(conn)
 
 	rpcResetFeedReq := &feed_service.ResetFeedRequest{
 		Base: &base.BaseReq{

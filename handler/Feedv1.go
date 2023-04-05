@@ -13,9 +13,6 @@ import (
 	"github.com/jlu-cow-studio/common/model/http_struct/feed"
 )
 
-const FeedServiceName = "cowstudio/feed"
-
-// Feedv1 handles HTTP GET requests to /feed/v1.
 func Feedv1(c *gin.Context) {
 	getFeedReq := new(feed.GetFeedReq)
 	getFeedRes := &feed.GetFeedRes{
@@ -41,14 +38,12 @@ func Feedv1(c *gin.Context) {
 
 	log.Println("Request:", getFeedReq)
 
-	conn, err := rpc.GetConn(FeedServiceName)
+	cli, err := rpc.GetFeedCli()
 	if err != nil {
-		log.Printf("Error when getting RPC connection: %s\n", err.Error())
+		log.Printf("Error when getting RPC cli: %s\n", err.Error())
 		getFeedRes.Base.Message = err.Error()
 		return
 	}
-
-	cli := feed_service.NewFeedServiceClient(conn)
 
 	rpcGetFeedReq := &feed_service.GetFeedRequest{
 		Base: &base.BaseReq{
