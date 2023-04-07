@@ -55,4 +55,6 @@ func RegisterHandlers() {
 	server.GET("/tag/list_item", handler.GetTagListByItem)
 	server.GET("/tag/list_user", handler.GetTagListByUser)
 	server.POST("/tag/user_interest", handler.UpdateUserTags)
+
+	server.POST("/event/tracking_report", handler.TrackingReport)
 }
