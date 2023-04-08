@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"os"
@@ -17,7 +18,8 @@ func PicHostDownload(c *gin.Context) {
 		return
 	}
 
-	filePath := "/opt/img/" + filepath.Base(url)
+	fmt.Println("get img:", url)
+	filePath := BasePath + filepath.Base(url)
 
 	// 检查文件是否存在
 	if _, err := os.Stat(filePath); os.IsNotExist(err) {
