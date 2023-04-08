@@ -1,6 +1,8 @@
 package main
 
 import (
+	"os"
+
 	"github.com/gin-gonic/gin"
 	"github.com/jlu-cow-studio/common/dal/redis"
 	"github.com/jlu-cow-studio/common/discovery"
@@ -20,6 +22,10 @@ func main() {
 
 	server.Use(middleware.RequestCheck()) //请求校验filter
 	server.Use(middleware.GetUserInfo())  //用户信息filter
+
+	if err := os.MkdirAll("/opt/img", 0755); err != nil {
+		panic(err)
+	}
 
 	RegisterHandlers()
 
@@ -57,4 +63,7 @@ func RegisterHandlers() {
 	server.POST("/tag/user_interest", handler.UpdateUserTags)
 
 	server.POST("/event/tracking_report", handler.TrackingReport)
+
+	server.POST("/img/upload", handler.PicHostUpload)
+	server.POST("/img/download/*url", handler.PicHostDownload)
 }
