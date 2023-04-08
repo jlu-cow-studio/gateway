@@ -10,7 +10,7 @@ import (
 )
 
 const BasePath = "/opt/img/"
-const BaseUrl = "/img/download"
+const BaseUrl = "/img/download/"
 
 // 获取随机的文件名
 func getRandomName() string {
