@@ -3,6 +3,7 @@ package middleware
 import (
 	"encoding/json"
 	"fmt"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jlu-cow-studio/common/dal/redis"
@@ -13,6 +14,9 @@ import (
 
 func GetUserInfo() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
+		if strings.HasPrefix(ctx.Request.URL.Path, "/img/") {
+			return
+		}
 		tmp, _ := ctx.Get("base")
 
 		var base http_struct.ReqBase = tmp.(http_struct.ReqBase)
