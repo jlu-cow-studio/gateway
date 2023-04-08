@@ -12,6 +12,7 @@ import (
 
 func RequestCheck() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
+		fmt.Println(ctx.Request.URL.Path)
 		if strings.HasPrefix(ctx.Request.URL.Path, "/img/") {
 			return
 		}
