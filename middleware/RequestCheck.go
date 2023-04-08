@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jlu-cow-studio/common/model/http_struct"
@@ -11,6 +12,10 @@ import (
 
 func RequestCheck() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
+		if strings.HasPrefix(ctx.Request.URL.Path, "/img/") {
+			return
+		}
+
 		baseReq := &http_struct.OnlyBaseReq{}
 
 		buf := &bytes.Buffer{}
