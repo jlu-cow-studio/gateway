@@ -20,6 +20,7 @@ func main() {
 
 	server = gin.New()
 
+	server.Use(middleware.CROS())         //跨域请求
 	server.Use(middleware.RequestCheck()) //请求校验filter
 	server.Use(middleware.GetUserInfo())  //用户信息filter
 
