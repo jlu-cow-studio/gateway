@@ -39,32 +39,32 @@ func RegisterHandlers() {
 	server.POST("/user/login", handler.UserLogin)
 	server.POST("/user/register", handler.UserRegister)
 	server.POST("/user/auth", handler.UserAuth)
-	server.GET("/user/info", handler.UserInfo)
+	server.POST("/user/info", handler.UserInfo)
 
 	server.POST("/user/follow", handler.UserFollow)
-	server.GET("/user/following", handler.UserFollowing)
-	server.GET("/user/follower", handler.UserFollower)
-	server.GET("/user/follow_count", handler.UserFollowCount)
+	server.POST("/user/following", handler.UserFollowing)
+	server.POST("/user/follower", handler.UserFollower)
+	server.POST("/user/follow_count", handler.UserFollowCount)
 
 	server.POST("/item/add", handler.ItemAdd)
 	server.DELETE("/item/delete", handler.ItemDelete)
 	server.POST("/item/update", handler.ItemUpdate)
 	server.POST("/item/add_favorite", handler.AddFavorite)
 
-	server.GET("/feed/v1", handler.Feedv1)
+	server.POST("/feed/v1", handler.Feedv1)
 	server.PUT("/feed/v1", handler.Feedv1Reset)
 
 	server.POST("/trade/recharge", handler.TradeRecharge)
-	server.GET("/trade/order_list", handler.TradeOrderList)
+	server.POST("/trade/order_list", handler.TradeOrderList)
 	server.POST("/trade/order", handler.TradeOrder)
 
-	server.GET("/tag/list_scene", handler.GetTagListByScene)
-	server.GET("/tag/list_item", handler.GetTagListByItem)
-	server.GET("/tag/list_user", handler.GetTagListByUser)
+	server.POST("/tag/list_scene", handler.GetTagListByScene)
+	server.POST("/tag/list_item", handler.GetTagListByItem)
+	server.POST("/tag/list_user", handler.GetTagListByUser)
 	server.POST("/tag/user_interest", handler.UpdateUserTags)
 
 	server.POST("/event/tracking_report", handler.TrackingReport)
 
 	server.POST("/img/upload", handler.PicHostUpload)
-	server.GET("/img/download/*url", handler.PicHostDownload)
+	server.POST("/img/download/*url", handler.PicHostDownload)
 }
