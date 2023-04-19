@@ -66,5 +66,5 @@ func RegisterHandlers() {
 	server.POST("/event/tracking_report", handler.TrackingReport)
 
 	server.POST("/img/upload", handler.PicHostUpload)
-	server.POST("/img/download/*url", handler.PicHostDownload)
+	server.GET("/img/download/*url", handler.PicHostDownload)
 }
